@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <link rel="stylesheet" href="./static/style.css">
+<body>
+    <h3>Resurant Planner</h3>
+    <div class="container">
+        <form method="post">
+            <div class="add_input">
+                <b>Add resturant</b>
+            </div>
+            <div>
+                <b>name</b>
+                <input type="text" class="add_input" name="add_name">
+            </div>
+            <div>
+                <b>type</b>
+                <input type="text" class="add_input" name="add_type">
+            </div>
+            <div>
+                <b>food type</b>
+                <input type="text" class="add_input" name="add_food_type">
+            </div>
+            <div>
+                <b>price range</b>
+                <input type="text" class="add_input" name="add_price_range">
+            </div>
+            <input type="submit" class="add_input" value="Add">
+        </form>
+        <form method="get">
+            <div class="search">
+                <b>Search resturant</b>
+            </div>
+            <div>
+                <b>name</b>
+                <input type="text" class="search" name="search_name">
+            </div>
+            <div>
+                <b>type</b>
+                <input type="text" class="search" name="search_type">
+            </div>
+            <div>
+                <b>food type</b>
+                <input type="text" class="search" name="search_food_type">
+            </div>
+            <div>
+                <b>price range</b>
+                <input type="text" class="search" name="search_price_range">
+            </div>
+            <input type="submit" class="search" value="search">
+            
+        </form>
+        <form method="get">
+            <div class="random">random pick</div>
+            <input type="submit" class="random" value="random">
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    max-width: fit-content;
+    max-width: fit-content;
+    background-color: grey;
+}
+
+.container form{
+    display: flex;
+    background-color: aqua;
+    margin: 20px;
+    padding: 20px;
+    font-size: 15px;
+    border-radius: 10%;
+}
+.container div{
+    margin: 20px;
+}
+
+.add_input{
+    margin: 10px;
+}
