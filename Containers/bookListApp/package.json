@@ -1,0 +1,14 @@
+{
+  "name": "bookListApp",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "node --watch src/app.js"
+  },
+  "author": {
+    "name": "Johannes Johnsson"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
