@@ -1,0 +1,105 @@
+html, body{
+    height: 90%;
+    font-family: fantasy;
+}
+
+.header{
+    display: flex;
+    align-items: center;
+}
+.overview{
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.headerProgress{
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    width: 30%;
+    border-style: solid;
+    border-color: lightseagreen;
+    border-radius: 10px;
+    align-items: stretch;
+    overflow: hidden;   
+}
+
+.headerProgressText{
+    width: 100%;
+    margin: 0;
+}
+
+.searchBox{
+    display: flex;
+    gap: 10px;
+}
+
+.overviewSection{
+    display: flex;
+    width: 50%;
+    margin: 1%;
+    flex-direction: column;
+    border-style: solid;
+    border-color: lightseagreen;
+    border-radius: 10px;
+    align-items: center;
+}
+
+.saveButton{
+    margin-left: auto;
+    height: 40px;
+    border: solid;
+    border-radius: 6px;
+    border-color: lightseagreen;
+    background-color: palegreen;
+}
+
+.bookItem{
+    margin: 10px;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: dotted;
+    border-color: green;
+    border-radius: 8px;
+}
+
+#bookList{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 95%;
+    height: 90%;
+    overflow-y: auto;
+    border-style: solid;
+    border-color: lightseagreen;
+}
+
+#bookListCard{
+    margin-left: auto;
+    width: 90%;
+    padding: 16px;
+    gap: 12px;
+    overflow-y: auto;
+}
+
+.savedBookCard {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid lightseagreen;
+    border-radius: 8px;
+    background: #f0fbfb;
+    box-sizing: border-box;
+}
+
+#currentBookProgress{
+    border-top: solid 1px;
+    border-color: lightseagreen;
+}
+
+#currentBook{
+    border-bottom: solid 1px;
+    border-color: lightseagreen;
+}
+

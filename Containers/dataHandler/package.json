@@ -1,0 +1,14 @@
+{
+  "name": "apiFetchService",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node apiFetch.js",
+    "dev": "node --watch apiFetch.js"
+  },
+  "author": {
+    "name": "Johannes Johnsson"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
