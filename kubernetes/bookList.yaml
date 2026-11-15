@@ -1,0 +1,199 @@
+# APP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-service
+  labels:
+    app: app
+spec:
+  type: LoadBalancer
+  ports:
+    - name: http
+      port: 8080
+      nodePort: 30001
+  selector:
+    app: app
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-dep
+  labels:
+    app: app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: app
+  template:
+    metadata:
+      labels:
+        app: app
+    spec:
+      containers:
+        - name: app
+          image: jolliy/booklistapp
+          ports:
+            - containerPort: 8080
+          env:
+          - name: DATA_HANDLER_URL
+            valueFrom:
+              configMapKeyRef:
+                name: config
+                key: datahandler_url
+          - name: EXPORT_URL
+            valueFrom:
+              configMapKeyRef:
+                name: config
+                key: export_url
+
+# Export
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: export-service
+  labels:
+    export: export
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 5000
+  selector:
+    export: export
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: export-dep
+  labels:
+    export: export
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      export: export
+  template:
+    metadata:
+      labels:
+        export: export
+    spec:
+      containers:
+        - name: export
+          image: jolliy/export
+          ports:
+            - containerPort: 5000
+          env:
+          - name: DATA_HANDLER_URL
+            valueFrom:
+              configMapKeyRef:
+                name: config
+                key: datahandler_url
+
+# dataHandler
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: datahandler-service
+  labels:
+    datahandler: datahandler
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 3000
+  selector:
+    datahandler: datahandler
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: datahandler-dep
+  labels:
+    datahandler: datahandler
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      datahandler: datahandler
+  template:
+    metadata:
+      labels:
+        datahandler: datahandler
+    spec:
+      containers:
+        - name: datahandler
+          image: jolliy/datahandler
+          ports:
+            - containerPort: 3000
+          env:
+          - name: BOOKLIST_DATABASE
+            valueFrom:
+              configMapKeyRef:
+                name: config
+                key: database_url
+
+# Database
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: db-booklist-service
+  labels:
+    database: db-booklist
+spec:
+  type: ClusterIP
+  ports:
+    - port: 27017
+  selector:
+    database: db-booklist
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: db-booklist
+  labels:
+    database: db-booklist
+spec:
+  serviceName: db-booklist-service
+  replicas: 1
+  selector:
+    matchLabels:
+      database: db-booklist
+  template:
+    metadata:
+      labels:
+        database: db-booklist
+    spec:
+      containers:
+        - name: db-booklist
+          image: mongo:7.0
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - name: db-booklist-data
+              mountPath: /data/db
+  volumeClaimTemplates:
+    - metadata:
+        name: db-booklist-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 100Mi
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config
+  labels:
+    config: config
+data:
+  datahandler_url: "http://datahandler-service:3000"
+  export_url: "http://export-service:5000"
+  database_url: "mongodb://db-booklist-service:27017"
+---

@@ -1,15 +1,14 @@
-build_app:
-	docker build -t app ./Containers/bookListApp
+kubernetes_cleanup: 
+	kubectl delete --cascade='foreground' -f ./kubernetes/bookList.yaml
 
-run_app: build_app
-	docker run --rm -p 8080:8080 app
+get_logs_dataHandler:
+	kubectl logs deployment/datahandler-dep
 
-temp_compose_for_dev: 
-	docker compose -f ./kubernetes/bookList.yaml up
+get_logs_bookListApp:
+	kubectl logs deployment/app-dep
 
+get_logs_export:
+	kubectl logs deployment/export-dep
 
-build_dataHandler:
-	docker build -t datahandler ./Containers/dataHandler
-
-run_dataHandler: build_dataHandler
-	docker run --rm -p 3000:3000 datahandler
+mongosh:
+	kubectl exec -it db-booklist-0 -- mongosh

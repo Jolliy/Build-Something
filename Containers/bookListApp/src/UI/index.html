@@ -2,28 +2,48 @@
 <html>
     <link rel="stylesheet" href="./UI/index.css">
     <body>
+
+        <div class="overlay" id="addOverlay">
+            <div class="modal">
+                <button class="button" id="cancelButtonOverlay" onclick="closeOverlay('addOverlay')">cancel</button>
+                <input id="nameField" type="text" autocomplete="off">
+                <button class="button" id="addButtonAddOverlay">add</button>
+            </div>
+        </div>
+
+        <div class="overlay" id="exportOverlay">
+            <div class="modal">
+                <button class="button" id="cancelButtonOverlay" onclick="closeOverlay('exportOverlay')">cancel</button>
+                <button class="button" id="jsonButton" onclick="exportBookList('json')">JSON</button>
+                <button class="button" id="csvButton" onclick="exportBookList('csv')">CSV</button>
+            </div>
+        </div>
+
         <header class="header">
             <h1>BookList</h1>
-            <div class="headerProgress">
-                <p class="headerProgressText" id="currentBook">Current Book: </p>
-                <p class="headerProgressText" id="currentBookProgress">Progress: </p>
-            </div>
         </header>
         <hr>
         <div class="overview">
             <div class="overviewSection" id="browseCard">
                 <h2>Browse Books</h2>
                 <div class="searchBox">
-                    <label for="bookSearch"> Search book</label>
-                    <input type="search" id="bookSearch">
-                    <button id="bookSearchButton">search</button>
+                    <label for="bookSearch"> Search Book</label>
+                    <input type="search" id="bookSearch" autocomplete="off">
+                    <button id="bookSearchButton">Search</button>
                 </div>
-                <div id="bookList"></div>
-
+                <div class="bookListContainer" id="bookSearchList"></div>
             </div>
             <div class="overviewSection" id="bookListCard">
                 <h2>BookList</h2>
-            
+                <div class="bookListUtils">
+                    <select name="booklists" id="bookListSelector">
+                        <option value="null">No booklists</option>
+                    </select>
+                    <button class="button" id="addBookList" onclick="openOverlay('addOverlay')">add</button>
+                    <button class="button" id="exportBookList" onclick="openOverlay('exportOverlay')">export</button>
+                    <button class="button" id="deleteBookList" onclick="deleteBookList()">delete</button>
+                </div>
+                <div class="bookListContainer" id="bookList"></div>
             </div>
 
         </div>

@@ -1,14 +1,15 @@
 {
-  "name": "apiFetchService",
+  "name": "dataHandler",
   "version": "1.0.0",
   "scripts": {
-    "start": "node apiFetch.js",
-    "dev": "node --watch apiFetch.js"
+    "start": "node src/dataHandler.js",
+    "dev": "node --watch src/dataHandler.js"
   },
   "author": {
     "name": "Johannes Johnsson"
   },
   "dependencies": {
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "mongodb": "7.0.0"
   }
 }
